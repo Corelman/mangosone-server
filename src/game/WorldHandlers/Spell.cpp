@@ -3373,8 +3373,13 @@ void Spell::finish(bool ok)
     // Stop Attack for some spells
     if (m_spellInfo->HasAttribute(SPELL_ATTR_STOP_ATTACK_TARGET))
         { m_caster->AttackStop(); }
-}
 
+#ifdef ENABLE_PLAYERBOTS
+    if(!m_caster->GetMapId())
+        return;
+#endif
+
+}
 void Spell::SendCastResult(SpellCastResult result)
 {
     if (m_caster->GetTypeId() != TYPEID_PLAYER)
